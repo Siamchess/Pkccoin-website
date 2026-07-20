@@ -305,6 +305,32 @@
   .ar-fg{stroke:var(--gold);stroke-dasharray:6 10;stroke-linecap:round;transform-origin:50% 50%;animation:spin-rev 30s linear infinite;}
   .alloc-card p{color:var(--ash);font-size:0.85rem;max-width:36ch;margin:0 auto;}
 
+  /* ---------- MARKET SNAPSHOT ---------- */
+  .market-band{background:var(--board);}
+  .market-note{font-size:0.85rem;color:var(--ash);max-width:64ch;margin-bottom:34px;padding:14px 18px;border-left:2px solid var(--jade);background:rgba(51,196,160,0.04);border-radius:0 8px 8px 0;}
+  .market-table{border:1px solid var(--line-2);border-radius:14px;overflow:hidden;background:var(--board-2);}
+  .mkt-head{display:grid;grid-template-columns:0.5fr 2fr 1.2fr 1fr 1fr;gap:12px;padding:14px 22px;font-family:'JetBrains Mono',monospace;font-size:0.68rem;letter-spacing:0.08em;text-transform:uppercase;color:var(--ash);border-bottom:1px solid var(--line-2);}
+  .mkt-row{display:grid;grid-template-columns:0.5fr 2fr 1.2fr 1fr 1fr;gap:12px;padding:14px 22px;align-items:center;border-bottom:1px solid var(--line);transition:background .2s;font-size:0.9rem;}
+  .mkt-row:last-child{border-bottom:none;}
+  .mkt-row:hover{background:rgba(233,184,36,0.03);}
+  .mkt-row .rank{color:var(--ash);font-family:'JetBrains Mono',monospace;}
+  .mkt-row .coin{display:flex;align-items:center;gap:10px;font-weight:600;}
+  .mkt-row .coin img{width:22px;height:22px;border-radius:50%;flex-shrink:0;background:var(--obsidian);}
+  .mkt-row .coin .sym{color:var(--ash);font-weight:400;font-size:0.82rem;}
+  .mkt-row .price{font-family:'JetBrains Mono',monospace;}
+  .mkt-row .chg{font-family:'JetBrains Mono',monospace;font-weight:600;}
+  .chg.up{color:var(--emerald);}
+  .chg.down{color:var(--ember);}
+  .mkt-row .cap{font-family:'JetBrains Mono',monospace;color:var(--ash);font-size:0.85rem;}
+  .market-foot{padding:16px 22px;font-size:0.76rem;color:var(--ash);border-top:1px solid var(--line-2);display:flex;justify-content:space-between;flex-wrap:wrap;gap:10px;}
+  .market-foot a{color:var(--gold-hi);}
+  .market-goal{display:flex;align-items:center;gap:10px;margin-top:28px;font-size:0.88rem;color:var(--ash);}
+  .market-goal .arrow-track{flex:1;height:2px;background:var(--line-2);position:relative;overflow:hidden;border-radius:2px;}
+  .market-goal .arrow-fill{position:absolute;inset:0;width:30%;background:linear-gradient(90deg,var(--gold-deep),var(--gold));animation:goalpulse 3s ease-in-out infinite;}
+  @keyframes goalpulse{0%,100%{opacity:0.7;}50%{opacity:1;}}
+  .skeleton{background:linear-gradient(90deg,var(--line) 25%,var(--line-2) 50%,var(--line) 75%);background-size:200% 100%;animation:shimmer 1.6s infinite;border-radius:4px;height:14px;}
+  @keyframes shimmer{0%{background-position:200% 0;}100%{background-position:-200% 0;}}
+
   /* ---------- LEGAL ---------- */
   .legal-band{background:var(--board);}
   .legal-box{border:1px solid var(--line-2);background:var(--obsidian);border-radius:12px;padding:30px;margin-bottom:18px;}
@@ -347,6 +373,7 @@
         <a href="#ecosystem">Ecosystem</a>
         <a href="#games">Games</a>
         <a href="#nft">NFT</a>
+        <a href="#market">Market</a>
         <a href="#transparency">Transparency</a>
         <a href="#roadmap">Roadmap</a>
         <a href="#legal">Risk &amp; Legal</a>
@@ -722,6 +749,39 @@
   </div>
 </section>
 
+<!-- ============ MARKET SNAPSHOT ============ -->
+<section id="market" class="band market-band">
+  <div class="wrap">
+    <div class="sec-head reveal">
+      <div class="sec-tag">Market context</div>
+      <h2>Where the wider crypto market stands today</h2>
+      <p>Live data on the top coins by market cap, pulled directly from CoinGecko's public API.</p>
+    </div>
+    <div class="market-note reveal">
+      <strong style="color:var(--bone);">Why this is here:</strong> these are the largest coins in the market — PKC is not affiliated with any of them and is not listed alongside them yet. We show this table for context, and as a marker of where PKC is working to get to: a listed, tracked, independently-verifiable token.
+    </div>
+    <div class="market-table reveal">
+      <div class="mkt-head"><span>#</span><span>Coin</span><span>Price</span><span>24h</span><span>Market Cap</span></div>
+      <div id="mktRows">
+        <!-- skeleton rows while loading -->
+        <div class="mkt-row"><span class="skeleton" style="width:20px"></span><span class="skeleton" style="width:120px"></span><span class="skeleton" style="width:70px"></span><span class="skeleton" style="width:50px"></span><span class="skeleton" style="width:80px"></span></div>
+        <div class="mkt-row"><span class="skeleton" style="width:20px"></span><span class="skeleton" style="width:120px"></span><span class="skeleton" style="width:70px"></span><span class="skeleton" style="width:50px"></span><span class="skeleton" style="width:80px"></span></div>
+        <div class="mkt-row"><span class="skeleton" style="width:20px"></span><span class="skeleton" style="width:120px"></span><span class="skeleton" style="width:70px"></span><span class="skeleton" style="width:50px"></span><span class="skeleton" style="width:80px"></span></div>
+      </div>
+      <div class="market-foot">
+        <span>Data via <a href="https://www.coingecko.com" target="_blank" rel="noopener">CoinGecko</a> · updates on page load</span>
+        <span id="mktUpdated">Loading…</span>
+      </div>
+    </div>
+    <div class="market-goal reveal">
+      <svg class="icon icon-sm" viewBox="0 0 24 24"><rect x="4" y="10" width="16" height="10" rx="2"/><path d="M8 10V7a4 4 0 0 1 8 0v3"/></svg>
+      <span>PKC today: PancakeSwap only</span>
+      <span class="arrow-track"><span class="arrow-fill"></span></span>
+      <span>Goal: audited, locked, and listed</span>
+    </div>
+  </div>
+</section>
+
 <!-- ============ LEGAL ============ -->
 <section id="legal" class="band legal-band">
   <div class="wrap">
@@ -888,6 +948,44 @@
       });
     });
     recalc();
+  })();
+
+  // ---- Market snapshot: live top coins via CoinGecko public API ----
+  (function(){
+    const rowsEl=document.getElementById('mktRows');
+    const updEl=document.getElementById('mktUpdated');
+    if(!rowsEl) return;
+    const fmtPrice=n=>{
+      if(n>=1) return '$'+n.toLocaleString('en-US',{maximumFractionDigits:2,minimumFractionDigits:2});
+      return '$'+n.toLocaleString('en-US',{maximumFractionDigits:6});
+    };
+    const fmtCap=n=>{
+      if(n>=1e12) return '$'+(n/1e12).toFixed(2)+'T';
+      if(n>=1e9) return '$'+(n/1e9).toFixed(2)+'B';
+      if(n>=1e6) return '$'+(n/1e6).toFixed(2)+'M';
+      return '$'+n.toLocaleString('en-US');
+    };
+    fetch('https://api.coingecko.com/api/v3/coins/markets?vs_currency=usd&order=market_cap_desc&per_page=8&page=1&sparkline=false')
+      .then(r=>{ if(!r.ok) throw new Error('bad response'); return r.json(); })
+      .then(data=>{
+        rowsEl.innerHTML = data.map(c=>{
+          const chgVal = typeof c.price_change_percentage_24h==='number' ? c.price_change_percentage_24h : 0;
+          const chgClass = chgVal>=0 ? 'up' : 'down';
+          const chgSign = chgVal>=0 ? '+' : '';
+          return '<div class="mkt-row">'
+            + '<span class="rank">'+c.market_cap_rank+'</span>'
+            + '<span class="coin"><img src="'+c.image+'" alt="" loading="lazy"><span>'+c.name+'</span> <span class="sym">'+c.symbol.toUpperCase()+'</span></span>'
+            + '<span class="price">'+fmtPrice(c.current_price)+'</span>'
+            + '<span class="chg '+chgClass+'">'+chgSign+chgVal.toFixed(2)+'%</span>'
+            + '<span class="cap">'+fmtCap(c.market_cap)+'</span>'
+            + '</div>';
+        }).join('');
+        updEl.textContent='Updated ' + new Date().toLocaleTimeString('en-US',{hour:'2-digit',minute:'2-digit'});
+      })
+      .catch(()=>{
+        rowsEl.innerHTML='<div class="mkt-row" style="grid-template-columns:1fr;color:var(--ash);font-size:0.85rem;">Live market data is temporarily unavailable. <a href="https://www.coingecko.com" target="_blank" rel="noopener" style="color:var(--gold-hi);margin-left:6px;">View on CoinGecko →</a></div>';
+        updEl.textContent='Unavailable right now';
+      });
   })();
 </script>
 </body>
