@@ -273,6 +273,23 @@
   .calc-disclaimer{margin-top:16px;font-size:0.72rem;color:var(--ash);line-height:1.55;border-left:2px solid var(--ember);padding-left:11px;}
   .stake-status{display:inline-flex;align-items:center;gap:8px;background:rgba(233,184,36,0.08);border:1px solid rgba(233,184,36,0.3);color:var(--gold-hi);border-radius:100px;padding:8px 16px;font-size:0.8rem;font-family:'JetBrains Mono',monospace;margin-bottom:22px;}
 
+  /* ---------- NFT ---------- */
+  .nft-band{background:var(--board);}
+  .nft-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:22px;}
+  @media(max-width:900px){.nft-grid{grid-template-columns:1fr;}}
+  .nft-card{background:var(--board-2);border:1px solid var(--line);border-radius:16px;padding:0;overflow:hidden;transition:transform .25s,border-color .25s;}
+  .nft-card:hover{transform:translateY(-5px);border-color:var(--gold);}
+  .nft-art{aspect-ratio:1;position:relative;display:flex;align-items:center;justify-content:center;overflow:hidden;
+    background:radial-gradient(circle at 30% 20%,rgba(233,184,36,0.16),transparent 60%),radial-gradient(circle at 75% 80%,rgba(31,169,126,0.14),transparent 60%),var(--obsidian);}
+  .nft-art::before{content:"";position:absolute;inset:0;background-image:linear-gradient(var(--line) 1px,transparent 1px),linear-gradient(90deg,var(--line) 1px,transparent 1px);background-size:22px 22px;opacity:0.5;}
+  .nft-art svg{position:relative;z-index:1;width:74px;height:74px;stroke:var(--gold-hi);}
+  .nft-card:hover .nft-art svg{stroke:var(--jade);transition:stroke .3s;}
+  .nft-body{padding:24px 24px 26px;}
+  .nft-body .kind{font-family:'JetBrains Mono',monospace;font-size:0.68rem;letter-spacing:0.1em;text-transform:uppercase;color:var(--gold);margin-bottom:10px;}
+  .nft-body h3{font-size:1.1rem;margin-bottom:8px;}
+  .nft-body p{color:var(--ash);font-size:0.88rem;}
+  .nft-legal-pill{display:inline-flex;align-items:center;gap:8px;background:rgba(31,169,126,0.08);border:1px solid rgba(31,169,126,0.32);color:var(--emerald);border-radius:100px;padding:8px 16px;font-size:0.8rem;font-family:'JetBrains Mono',monospace;margin-bottom:24px;}
+
   /* ---------- TOKENOMICS ---------- */
   .tk-grid{display:grid;grid-template-columns:1fr 1fr;gap:52px;align-items:start;}
   @media(max-width:900px){.tk-grid{grid-template-columns:1fr;}}
@@ -329,6 +346,7 @@
         <a href="#stake">Stake</a>
         <a href="#ecosystem">Ecosystem</a>
         <a href="#games">Games</a>
+        <a href="#nft">NFT</a>
         <a href="#transparency">Transparency</a>
         <a href="#roadmap">Roadmap</a>
         <a href="#legal">Risk &amp; Legal</a>
@@ -572,6 +590,44 @@
   </div>
 </section>
 
+<!-- ============ NFT ============ -->
+<section id="nft" class="band nft-band">
+  <div class="wrap">
+    <div class="sec-head reveal">
+      <div class="sec-tag">Collectibles</div>
+      <span class="nft-legal-pill"><svg class="icon icon-sm" style="stroke:var(--emerald)" viewBox="0 0 24 24"><path d="M12 3l8 4v5c0 4-3 7-8 9-5-2-8-5-8-9V7z"/><path d="M9 12l2 2 4-4"/></svg> Utility collectibles — not a financial return</span>
+      <h2>NFTs for the board, not for speculation</h2>
+      <p>Every NFT in this ecosystem does something in-game or proves a real result — cosmetics, achievements, and access. None of them pay dividends, and none are sold as random "mystery box" draws.</p>
+    </div>
+    <div class="nft-grid">
+      <div class="nft-card reveal">
+        <div class="nft-art"><svg viewBox="0 0 24 24" fill="none" stroke-width="1.4" stroke-linecap="round" stroke-linejoin="round"><rect x="3" y="3" width="18" height="18" rx="2"/><path d="M3 9h18M9 3v18"/><circle cx="6" cy="6" r="1"/></svg></div>
+        <div class="nft-body">
+          <div class="kind">Cosmetic</div>
+          <h3>Board &amp; piece sets</h3>
+          <p>Digital art for boards and piece styles. Purely cosmetic — they change nothing about how a game is won.</p>
+        </div>
+      </div>
+      <div class="nft-card reveal">
+        <div class="nft-art"><svg viewBox="0 0 24 24" fill="none" stroke-width="1.4" stroke-linecap="round" stroke-linejoin="round"><path d="M12 2l3 7h7l-6 4 2 7-6-4-6 4 2-7-6-4h7z"/></svg></div>
+        <div class="nft-body">
+          <div class="kind">Achievement</div>
+          <h3>Champion badges</h3>
+          <p>Minted automatically to verified winners of skill tournaments. A permanent, on-chain record of a real result — not something you can buy.</p>
+        </div>
+      </div>
+      <div class="nft-card reveal">
+        <div class="nft-art"><svg viewBox="0 0 24 24" fill="none" stroke-width="1.4" stroke-linecap="round" stroke-linejoin="round"><rect x="4" y="4" width="16" height="16" rx="3"/><path d="M9 12l2 2 4-4"/></svg></div>
+        <div class="nft-body">
+          <div class="kind">Access</div>
+          <h3>Membership pass</h3>
+          <p>Unlocks entry to select tournaments and features. Utility access only — holding one is not an investment and pays no return.</p>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
 <!-- ============ TRANSPARENCY ============ -->
 <section id="transparency" class="band">
   <div class="wrap">
@@ -620,8 +676,18 @@
       </div>
       <div class="turn">
         <div class="tno">Move 4</div>
+        <h3>NFT collectibles launch</h3>
+        <p>Introduce board &amp; piece-set cosmetics, plus champion badges minted automatically to verified tournament winners — on-chain proof of a real result.</p>
+      </div>
+      <div class="turn">
+        <div class="tno">Move 5</div>
         <h3>Marketplace &amp; listings</h3>
-        <p>Launch the item marketplace and apply to CoinMarketCap and CoinGecko — a step that requires audit and lock proofs to be public first.</p>
+        <p>Launch the item and NFT marketplace, and apply to CoinMarketCap and CoinGecko — a step that requires audit and lock proofs to be public first.</p>
+      </div>
+      <div class="turn">
+        <div class="tno">Move 6</div>
+        <h3>Membership &amp; community governance</h3>
+        <p>Introduce a membership-pass NFT for tournament access, and open limited community voting on tournament rules to PKC and NFT holders.</p>
       </div>
     </div>
   </div>
