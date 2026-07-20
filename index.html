@@ -220,6 +220,43 @@
   .turn h3{font-size:1.15rem;margin-bottom:8px;}
   .turn p{color:var(--ash);font-size:0.9rem;max-width:56ch;}
 
+  /* ---------- STAKING ---------- */
+  .stake-band{background:linear-gradient(180deg,var(--board),var(--obsidian));}
+  .stake-grid{display:grid;grid-template-columns:0.95fr 1.05fr;gap:52px;align-items:start;}
+  @media(max-width:940px){.stake-grid{grid-template-columns:1fr;gap:40px;}}
+  .stake-copy .tier-list{list-style:none;margin-top:24px;}
+  .stake-copy .tier{display:flex;align-items:center;justify-content:space-between;gap:16px;padding:15px 18px;border:1px solid var(--line);border-radius:10px;margin-bottom:10px;transition:border-color .2s,background .2s;cursor:pointer;}
+  .stake-copy .tier:hover,.stake-copy .tier.sel{border-color:var(--gold);background:rgba(233,184,36,0.04);}
+  .stake-copy .tier .t-left{display:flex;align-items:center;gap:12px;}
+  .stake-copy .tier .lock-ic{width:34px;height:34px;border-radius:8px;border:1px solid var(--line-2);display:flex;align-items:center;justify-content:center;}
+  .stake-copy .tier h4{font-size:0.98rem;font-family:'Clash Display',sans-serif;font-weight:600;}
+  .stake-copy .tier span.dur{font-size:0.78rem;color:var(--ash);font-family:'JetBrains Mono',monospace;}
+  .stake-copy .tier .mult{font-family:'JetBrains Mono',monospace;font-size:0.85rem;color:var(--gold-hi);}
+
+  .calc-card{background:var(--board-2);border:1px solid var(--line-2);border-radius:16px;padding:28px;position:relative;overflow:hidden;}
+  .calc-card::before{content:"";position:absolute;top:0;left:0;right:0;height:3px;background:linear-gradient(90deg,var(--gold-deep),var(--gold),var(--gold-hi));}
+  .calc-card h3{font-size:1.1rem;margin-bottom:4px;display:flex;align-items:center;gap:10px;}
+  .calc-card .sub{color:var(--ash);font-size:0.82rem;margin-bottom:22px;}
+  .calc-field{margin-bottom:18px;}
+  .calc-field label{display:flex;justify-content:space-between;font-size:0.74rem;color:var(--ash);text-transform:uppercase;letter-spacing:0.1em;font-family:'JetBrains Mono',monospace;margin-bottom:8px;}
+  .calc-input{background:var(--obsidian);border:1px solid var(--line);border-radius:10px;padding:14px 16px;display:flex;align-items:center;gap:10px;transition:border-color .2s;}
+  .calc-input:focus-within{border-color:var(--gold);}
+  .calc-input input{background:none;border:none;color:var(--bone);font-size:1.3rem;font-family:'JetBrains Mono',monospace;width:100%;outline:none;}
+  .calc-input .unit{font-family:'JetBrains Mono',monospace;color:var(--ash);font-size:0.85rem;}
+  .apr-row{display:flex;align-items:center;gap:14px;}
+  .apr-slider{-webkit-appearance:none;appearance:none;height:4px;border-radius:4px;background:var(--line-2);flex:1;outline:none;}
+  .apr-slider::-webkit-slider-thumb{-webkit-appearance:none;width:18px;height:18px;border-radius:50%;background:var(--gold);cursor:pointer;box-shadow:0 0 0 4px var(--gold-glow);}
+  .apr-slider::-moz-range-thumb{width:18px;height:18px;border:none;border-radius:50%;background:var(--gold);cursor:pointer;}
+  .apr-val{font-family:'JetBrains Mono',monospace;color:var(--gold-hi);font-size:1rem;min-width:56px;text-align:right;}
+  .calc-result{margin-top:22px;padding:20px;background:var(--obsidian);border:1px solid var(--line);border-radius:12px;}
+  .calc-result .rr{display:flex;justify-content:space-between;align-items:baseline;padding:8px 0;border-bottom:1px solid var(--line);}
+  .calc-result .rr:last-child{border-bottom:none;}
+  .calc-result .rr .rk{color:var(--ash);font-size:0.85rem;}
+  .calc-result .rr .rv{font-family:'JetBrains Mono',monospace;font-size:1.15rem;color:var(--gold-hi);font-weight:600;}
+  .calc-result .rr.big .rv{font-size:1.5rem;}
+  .calc-disclaimer{margin-top:16px;font-size:0.72rem;color:var(--ash);line-height:1.55;border-left:2px solid var(--ember);padding-left:11px;}
+  .stake-status{display:inline-flex;align-items:center;gap:8px;background:rgba(233,184,36,0.08);border:1px solid rgba(233,184,36,0.3);color:var(--gold-hi);border-radius:100px;padding:8px 16px;font-size:0.8rem;font-family:'JetBrains Mono',monospace;margin-bottom:22px;}
+
   /* ---------- TOKENOMICS ---------- */
   .tk-grid{display:grid;grid-template-columns:1fr 1fr;gap:52px;align-items:start;}
   @media(max-width:900px){.tk-grid{grid-template-columns:1fr;}}
@@ -272,6 +309,7 @@
       </a>
       <div class="nav-links">
         <a href="#buy">Buy</a>
+        <a href="#stake">Stake</a>
         <a href="#ecosystem">Ecosystem</a>
         <a href="#games">Games</a>
         <a href="#transparency">Transparency</a>
@@ -406,6 +444,83 @@
         <div class="ic"><svg class="icon" viewBox="0 0 24 24"><rect x="4" y="10" width="16" height="10" rx="2"/><path d="M8 10V7a4 4 0 0 1 8 0v3"/></svg></div>
         <h3>Protocol staking</h3>
         <p>Lock PKC for a chosen term for protocol rewards. Rewards are variable and depend on parameters — never fixed or guaranteed.</p>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ============ STAKING ============ -->
+<section id="stake" class="band stake-band">
+  <div class="wrap">
+    <div class="sec-head reveal">
+      <div class="sec-tag">Staking</div>
+      <h2>Lock PKC, earn protocol rewards</h2>
+      <p>Pick a lock period and estimate your rewards. Longer locks earn a higher reward multiplier — but every rate here is illustrative and adjustable, never a promise.</p>
+    </div>
+    <div class="stake-grid">
+      <div class="stake-copy reveal">
+        <span class="stake-status"><svg class="icon icon-sm" viewBox="0 0 24 24"><rect x="4" y="10" width="16" height="10" rx="2"/><path d="M8 10V7a4 4 0 0 1 8 0v3"/></svg> Staking contract launches after audit</span>
+        <p style="color:var(--ash);font-size:0.95rem;margin-bottom:8px;">Choose a lock tier to see how the multiplier changes your estimate. Tiers are examples of how the staking contract will be structured.</p>
+        <ul class="tier-list" id="tierList">
+          <li class="tier" data-mult="1" data-days="30">
+            <div class="t-left">
+              <div class="lock-ic"><svg class="icon icon-sm" viewBox="0 0 24 24"><circle cx="12" cy="12" r="9"/><path d="M12 7v5l3 3"/></svg></div>
+              <div><h4>Flexible</h4><span class="dur">30-day lock</span></div>
+            </div>
+            <span class="mult">×1.0</span>
+          </li>
+          <li class="tier sel" data-mult="1.5" data-days="90">
+            <div class="t-left">
+              <div class="lock-ic"><svg class="icon icon-sm" viewBox="0 0 24 24"><circle cx="12" cy="12" r="9"/><path d="M12 7v5l3 3"/></svg></div>
+              <div><h4>Standard</h4><span class="dur">90-day lock</span></div>
+            </div>
+            <span class="mult">×1.5</span>
+          </li>
+          <li class="tier" data-mult="2.2" data-days="180">
+            <div class="t-left">
+              <div class="lock-ic"><svg class="icon icon-sm" viewBox="0 0 24 24"><circle cx="12" cy="12" r="9"/><path d="M12 7v5l3 3"/></svg></div>
+              <div><h4>Committed</h4><span class="dur">180-day lock</span></div>
+            </div>
+            <span class="mult">×2.2</span>
+          </li>
+          <li class="tier" data-mult="3" data-days="365">
+            <div class="t-left">
+              <div class="lock-ic"><svg class="icon icon-sm" viewBox="0 0 24 24"><circle cx="12" cy="12" r="9"/><path d="M12 7v5l3 3"/></svg></div>
+              <div><h4>Champion</h4><span class="dur">365-day lock</span></div>
+            </div>
+            <span class="mult">×3.0</span>
+          </li>
+        </ul>
+      </div>
+
+      <div class="calc-card reveal">
+        <h3><svg class="icon icon-sm" viewBox="0 0 24 24"><rect x="4" y="3" width="16" height="18" rx="2"/><path d="M8 7h8M8 11h8M8 15h4"/></svg> Reward calculator</h3>
+        <p class="sub">An estimate — not a quote and not a guarantee.</p>
+
+        <div class="calc-field">
+          <label>Amount to stake</label>
+          <div class="calc-input">
+            <input id="stakeAmt" type="text" inputmode="decimal" value="100,000">
+            <span class="unit">PKC</span>
+          </div>
+        </div>
+
+        <div class="calc-field">
+          <label><span>Assumed base reward rate</span><span id="aprShow">12% APR</span></label>
+          <div class="apr-row">
+            <input class="apr-slider" id="aprSlider" type="range" min="0" max="30" step="1" value="12">
+            <span class="apr-val" id="aprVal">12%</span>
+          </div>
+        </div>
+
+        <div class="calc-result">
+          <div class="rr"><span class="rk">Lock tier</span><span class="rv" id="rTier">Standard · 90d</span></div>
+          <div class="rr"><span class="rk">Reward multiplier</span><span class="rv" id="rMult">×1.5</span></div>
+          <div class="rr"><span class="rk">Effective rate</span><span class="rv" id="rEff">18%</span></div>
+          <div class="rr big"><span class="rk">Est. reward over term</span><span class="rv" id="rReward">— PKC</span></div>
+        </div>
+
+        <p class="calc-disclaimer">This calculator is for illustration only. The base rate is a value <em>you</em> set with the slider — it is not an offer, promise, or prediction. Actual staking rewards are variable, determined by the smart contract at stake time, and can be lower or zero. Nothing here is financial advice.</p>
       </div>
     </div>
   </div>
@@ -642,6 +757,55 @@
     estimate();
   });
   estimate();
+
+  // ---- Staking calculator (illustrative only) ----
+  (function(){
+    const amtEl=document.getElementById('stakeAmt');
+    const slider=document.getElementById('aprSlider');
+    const aprVal=document.getElementById('aprVal');
+    const aprShow=document.getElementById('aprShow');
+    const tiers=document.querySelectorAll('#tierList .tier');
+    const rTier=document.getElementById('rTier');
+    const rMult=document.getElementById('rMult');
+    const rEff=document.getElementById('rEff');
+    const rReward=document.getElementById('rReward');
+    if(!amtEl||!slider) return;
+
+    let mult=1.5, days=90, tierName='Standard';
+    const fmt=n=>n.toLocaleString('en-US',{maximumFractionDigits:0});
+
+    function recalc(){
+      const amt=parseFloat((amtEl.value||'').replace(/,/g,''))||0;
+      const baseApr=parseFloat(slider.value)||0;
+      const effApr=baseApr*mult;
+      // reward over the actual lock term (not annualized), illustrative simple interest
+      const reward = amt * (effApr/100) * (days/365);
+      aprVal.textContent=baseApr+'%';
+      aprShow.textContent=baseApr+'% APR';
+      rTier.textContent=tierName+' · '+days+'d';
+      rMult.textContent='×'+mult.toFixed(1);
+      rEff.textContent=effApr.toFixed(1)+'%';
+      rReward.textContent=fmt(reward)+' PKC';
+    }
+    // pretty-format amount input on blur
+    amtEl.addEventListener('input',()=>{ recalc(); });
+    amtEl.addEventListener('blur',()=>{
+      const v=parseFloat((amtEl.value||'').replace(/,/g,''))||0;
+      if(v>0) amtEl.value=v.toLocaleString('en-US');
+    });
+    slider.addEventListener('input',recalc);
+    tiers.forEach(t=>{
+      t.addEventListener('click',()=>{
+        tiers.forEach(x=>x.classList.remove('sel'));
+        t.classList.add('sel');
+        mult=parseFloat(t.dataset.mult);
+        days=parseInt(t.dataset.days,10);
+        tierName=t.querySelector('h4').textContent;
+        recalc();
+      });
+    });
+    recalc();
+  })();
 </script>
 </body>
 </html>
